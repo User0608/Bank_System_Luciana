@@ -18,14 +18,14 @@ public class Conexion {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String url = "jdbc:mysql://localhost:3306/eurekabank";
         String user = "root";
-        String password = "12345";
+        String password = "";
         return DriverManager.getConnection(url, user, password);
     }
 
     public static void main(String[] args) {
         try {
             Connection cn = Conexion.establecerConexion();
-            System.out.println("\nConexión establecida");
+            System.out.println("\nConexión establecida <--");
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println("\nConexión fallida: " + ex.toString());
         }
