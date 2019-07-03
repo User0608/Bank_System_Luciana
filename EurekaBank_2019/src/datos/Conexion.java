@@ -5,6 +5,10 @@
  */
 package datos;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author adriana
@@ -14,7 +18,7 @@ public class Conexion {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String url = "jdbc:mysql://localhost:3306/eurekabank";
         String user = "root";
-        String password = "";
+        String password = "12345";
         return DriverManager.getConnection(url, user, password);
     }
 
