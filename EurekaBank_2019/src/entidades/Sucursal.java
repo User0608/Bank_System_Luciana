@@ -14,18 +14,28 @@ import java.util.ArrayList;
  */
 public class Sucursal {
 
+    private String codigo;
     private String nombre;
     private String ciudad;
     private String direccion;
     private ArrayList<RealCuenta> cuentas;
     private ArrayList<Empleado> empleados;
 
-    public Sucursal(String nombre, String ciudad, String direccion, ArrayList<RealCuenta> cuentas, ArrayList<Empleado> empleados) {
+    public Sucursal(String codigo, String nombre, String ciudad, String direccion, ArrayList<RealCuenta> cuentas, ArrayList<Empleado> empleados) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.direccion = direccion;
         this.cuentas = cuentas;
         this.empleados = empleados;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombre() {

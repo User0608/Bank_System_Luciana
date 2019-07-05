@@ -9,13 +9,12 @@ package entidades.moneda;
  *
  * @author adriana
  */
-public class Moneda {
-
+public class Moneda {   
     private float interes_mensual;
     private float costo_movimiento;
     private float cargo_mantenimiento;
     private String descripcion;
-
+  
     public float getInteres_mensual() {
         return interes_mensual;
     }

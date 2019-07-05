@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class RealCuenta implements ICuenta {
 
+    private String codigo;
     private ArrayList<Movimiento> movimientos;
     private Sucursal sucursal;
     private Cliente cliente;
@@ -29,7 +30,9 @@ public class RealCuenta implements ICuenta {
     private int cantida_movimiento;
     private String clave;
 
-    public RealCuenta(ArrayList<Movimiento> movimientos, Sucursal sucursal, Cliente cliente, Moneda moneda, String numero_cuenta, double saldo, Date fecha_creacion, String estado, int cantida_movimiento, String clave) {
+    public RealCuenta(String codigo, ArrayList<Movimiento> movimientos, Sucursal sucursal, Cliente cliente,
+            Moneda moneda, String numero_cuenta, double saldo, Date fecha_creacion, String estado, int cantida_movimiento, String clave) {
+        this.codigo = codigo;
         this.movimientos = movimientos;
         this.sucursal = sucursal;
         this.cliente = cliente;
@@ -40,6 +43,14 @@ public class RealCuenta implements ICuenta {
         this.estado = estado;
         this.cantida_movimiento = cantida_movimiento;
         this.clave = clave;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public ArrayList<Movimiento> getMovimientos() {

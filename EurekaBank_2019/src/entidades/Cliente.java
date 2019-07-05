@@ -13,20 +13,30 @@ import java.util.ArrayList;
  * @author adriana
  */
 public class Cliente extends Persona {
-
+    private String codigo;
     private ArrayList<RealCuenta> cuenta;
     private String dni;
     private String telefono;
     private String email;
 
-    public Cliente(ArrayList<RealCuenta> cuenta, String dni, String telefono, String email, String paterno, String materno, String nombre, String ciudad, String direccion) {
+    public Cliente(String codigo,ArrayList<RealCuenta> cuenta, String dni, String telefono, String email, String paterno, String materno, String nombre, String ciudad, String direccion) {
         super(paterno, materno, nombre, ciudad, direccion);
+        this.codigo=codigo;
         this.cuenta = cuenta;
         this.dni = dni;
         this.telefono = telefono;
         this.email = email;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    
     public ArrayList<RealCuenta> getCuenta() {
         return cuenta;
     }
