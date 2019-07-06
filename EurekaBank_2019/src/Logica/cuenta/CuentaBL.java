@@ -5,6 +5,7 @@
  */
 package Logica.cuenta;
 
+import datos.cuenta.CuentaDAL;
 import entidades.cuenta.RealCuenta;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class CuentaBL {
     public static String registrar(RealCuenta cuenta){
         String mensaje;
         mensaje=null;
-        if(CuentaDAL.registrar(cuenta)=="true"){
+        if(CuentaDAL.registrar(cuenta)=="ok"){
             mensaje="Nueva Cuenta Registrada";
         }
         else mensaje= "datos de la cuenta encontrados";
@@ -25,7 +26,7 @@ public class CuentaBL {
      public static String bloquear(String codigo){   
          String mensaje;
         if(codigo.trim().length()!=0){
-            if (CuentaDAL.bloquear(codigo)=="true"){
+            if (CuentaDAL.bloquear(codigo).compareTo("ok")==0){
                 mensaje ="cuenta Bloqueada";
             }
             else mensaje="oh no";

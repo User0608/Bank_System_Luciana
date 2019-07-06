@@ -20,7 +20,10 @@ public class Sucursal {
     private String direccion;
     private ArrayList<RealCuenta> cuentas;
     private ArrayList<Empleado> empleados;
-
+    
+    public Sucursal(){
+        
+    }
     public Sucursal(String codigo, String nombre, String ciudad, String direccion, ArrayList<RealCuenta> cuentas, ArrayList<Empleado> empleados) {
         this.codigo = codigo;
         this.nombre = nombre;

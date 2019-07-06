@@ -5,6 +5,7 @@
  */
 package Logica.sucursal;
 
+import datos.sucursal.SucursalDAL;
 import entidades.Sucursal;
 import java.util.ArrayList;
 

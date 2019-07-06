@@ -73,7 +73,7 @@ public class EmpleadoBL {
         return mensaje;
     }
      
-       public static ArrayList<Empleado> listarEmpleados() {
+       public static ArrayList<Empleado> listar() {
         return EmpleadoDAl.listar();
     }
 }

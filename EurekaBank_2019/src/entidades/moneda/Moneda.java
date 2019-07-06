@@ -10,11 +10,22 @@ package entidades.moneda;
  * @author adriana
  */
 public class Moneda {   
+    private String codigo;
     private float interes_mensual;
     private float costo_movimiento;
     private float cargo_mantenimiento;
     private String descripcion;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
   
+    
+    
     public float getInteres_mensual() {
         return interes_mensual;
     }
