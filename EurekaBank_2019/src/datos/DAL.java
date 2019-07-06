@@ -17,10 +17,10 @@ import java.sql.Statement;
  */
 public abstract class DAL {
 
-    protected Connection conexion = null;
-    protected PreparedStatement prepared_statement = null;
-    protected Statement statement = null;
-    protected CallableStatement callable_statemen = null;
-    protected ResultSet result_set = null;
+    protected static Connection conexion = null;
+    protected static PreparedStatement prepared_statement = null;
+    protected static Statement statement = null;
+    protected static CallableStatement callable_statemen = null;
+    protected static ResultSet result_set = null;
     
 }

@@ -18,7 +18,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class EmpleadoDAl extends DAL{
     //emplcodigio,emplpaterno,emplmatern,emplnombre,emplciudad,empldireccion,emplusuario,emplclave
-    public String insertar(Empleado empleado) {
+    public static String insertar(Empleado empleado) {
         String mensaje = null;
         try {
             String sql = "{call sp_insertarEmpleado(?,?,?,?,?,?,?,?)}";
@@ -49,7 +49,7 @@ public class EmpleadoDAl extends DAL{
         return mensaje;
     }
 
-    public String buscar(String codigo) {
+    public static String buscar(String codigo) {
         String mensaje = null;
         try {
             String sql = "{call sp_buscarEmpleado(?)}";
@@ -75,7 +75,7 @@ public class EmpleadoDAl extends DAL{
         return mensaje;
     }
 
-    public String actualizar(Empleado empleado) {
+    public static String actualizar(Empleado empleado) {
         String mensaje = null;
         try {
             String sql = "{call sp_actualizarEmpleado(?,?,?,?,?,?,?,?)}";
@@ -106,7 +106,7 @@ public class EmpleadoDAl extends DAL{
         return mensaje;
     }
 
-    public  ArrayList<Empleado> listar() {
+    public static ArrayList<Empleado> listar() {
         ArrayList<Empleado> empleados = new ArrayList<Empleado>();
         try {
             String sql = "{call sp_listarEmpleados()}";
@@ -138,7 +138,7 @@ public class EmpleadoDAl extends DAL{
         return empleados;
     }
 
-    public String eliminar(String codigo) {
+    public static String eliminar(String codigo) {
         String mensaje = null;
         try {
             String sql = "{call sp_eliminarEmpleado(?)}";

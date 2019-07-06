@@ -19,7 +19,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class ClienteDAL extends DAL {
 
 
-    public String insertar(Cliente cliente) {
+    public static String insertar(Cliente cliente) {
         
         //p_codigo ,p_paterno,p_materno,p_nombre,p_dni,p_ciudad,p_direccion,p_telefono,p_email
         String mensaje = null;
@@ -52,7 +52,7 @@ public class ClienteDAL extends DAL {
         return mensaje;
     }
 
-    public String buscar(String codigo) {
+    public static String buscar(String codigo) {
         String mensaje = null;
         try {
             String sql = "call sp_buscarCliente(?)";
@@ -79,7 +79,7 @@ public class ClienteDAL extends DAL {
         return mensaje;
     }
 
-    public String actualizar(Cliente cliente) {
+    public static String actualizar(Cliente cliente) {
         String mensaje = null;
         try {
             String sql = "{call sp_acutualizarCliente(?,?,?,?,?,?,?,?,?)}";
@@ -111,7 +111,7 @@ public class ClienteDAL extends DAL {
         return mensaje;
     }
 
-    public ArrayList<Cliente> listar() {
+    public static ArrayList<Cliente> listar() {
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         try {
             String sql = "{call sp_listarClientes()}";
@@ -144,7 +144,7 @@ public class ClienteDAL extends DAL {
         return clientes;
     }
 
-    public String eliminar(String codigo) {
+    public static String eliminar(String codigo) {
         String mensaje = null;
         try {
             String sql = "{call sp_eliminarCliente(?)}";

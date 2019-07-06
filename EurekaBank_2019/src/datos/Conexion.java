@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author adriana
  */
-public class Conexion {
+public  class Conexion {
         public static Connection establecerConexion() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String url = "jdbc:mysql://localhost:3306/eurekabank";
