@@ -15,7 +15,10 @@ public class Persona {
     private String nombre;
     private String ciudad;
     private String direccion;
-
+    
+    public Persona(){
+        
+    }
     public Persona(String paterno, String materno, String nombre, String ciudad, String direccion) {
         this.paterno = paterno;
         this.materno = materno;

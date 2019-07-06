@@ -14,24 +14,26 @@ import java.util.ArrayList;
  * @author adriana
  */
 public class Empleado extends Persona {
+
     private String codigo;
     private ArrayList<Movimiento> movimientos;
     private RealCuenta cuenta;
     private String usuario;
     private String clave;
 
+    public Empleado() {
+        this.movimientos = new ArrayList<Movimiento>();        
+    }
+
     public Empleado(ArrayList<Movimiento> movimientos, RealCuenta cuenta, String usuario, String clave, String paterno,
             String materno, String nombre, String ciudad, String direccion) {
         super(paterno, materno, nombre, ciudad, direccion);
-        this.codigo=codigo;
+        this.codigo = codigo;
         this.usuario = usuario;
         this.clave = clave;
         this.cuenta = cuenta;
-        if (movimientos != null) {
-            this.movimientos = movimientos;
-        } else {
-            this.movimientos = new ArrayList<Movimiento>();
-        }
+        this.movimientos = (movimientos == null) ? new ArrayList<Movimiento>() : movimientos;
+
     }
 
     public String getCodigo() {
@@ -41,7 +43,7 @@ public class Empleado extends Persona {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
+
     public ArrayList<Movimiento> getMovimientos() {
         return this.movimientos;
     }

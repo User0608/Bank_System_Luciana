@@ -20,7 +20,7 @@ public abstract class DAL {
     protected Connection conexion = null;
     protected PreparedStatement prepared_statement = null;
     protected Statement statement = null;
-    protected CallableStatement callable_statemen = null;
+    protected CallableStatement callable_statement = null;
     protected ResultSet result_set = null;
     
 }

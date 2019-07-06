@@ -13,16 +13,21 @@ import java.util.ArrayList;
  * @author adriana
  */
 public class Cliente extends Persona {
+
     private String codigo;
     private ArrayList<RealCuenta> cuenta;
     private String dni;
     private String telefono;
     private String email;
 
-    public Cliente(String codigo,ArrayList<RealCuenta> cuenta, String dni, String telefono, String email, String paterno, String materno, String nombre, String ciudad, String direccion) {
+    public Cliente() {
+        this.cuenta = new ArrayList<>();        
+    }
+
+    public Cliente(String codigo, ArrayList<RealCuenta> cuenta, String dni, String telefono, String email, String paterno, String materno, String nombre, String ciudad, String direccion) {
         super(paterno, materno, nombre, ciudad, direccion);
-        this.codigo=codigo;
-        this.cuenta = cuenta;
+        this.codigo = codigo;
+        this.cuenta = (cuenta == null) ? new ArrayList<>() : cuenta;
         this.dni = dni;
         this.telefono = telefono;
         this.email = email;
@@ -36,7 +41,6 @@ public class Cliente extends Persona {
         this.codigo = codigo;
     }
 
-    
     public ArrayList<RealCuenta> getCuenta() {
         return cuenta;
     }
@@ -71,8 +75,7 @@ public class Cliente extends Persona {
 
     @Override
     public String toString() {
-        return super.toString()+ " -> Cliente{" + "cuenta=" + cuenta + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + '}';
+        return super.toString() + " -> Cliente{" + "cuenta=" + cuenta + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + '}';
     }
-    
 
 }
