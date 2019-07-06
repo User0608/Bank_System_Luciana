@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class SucursalBL {
      
     
-    public static ArrayList<Sucursal> listar() {
+    public  ArrayList<Sucursal> listar() {
         return SucursalDAL.listar();
     }
 }

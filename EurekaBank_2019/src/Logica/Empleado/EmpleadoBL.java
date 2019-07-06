@@ -52,7 +52,7 @@ public class EmpleadoBL {
         return mensaje;
     }
         
-    public static String buscapr(String codigo) {
+    public  String buscar(String codigo) {
         if(codigo.trim().length()==4){
             return EmpleadoDAl.buscar(codigo);}
         else
@@ -60,7 +60,7 @@ public class EmpleadoBL {
     }
     
     
-     public static String eliminar(String codigo) {
+     public  String eliminar(String codigo) {
         String mensaje;
         if(codigo.trim().length() == 4) {
             mensaje = EmpleadoDAl.eliminar(codigo);
@@ -73,7 +73,7 @@ public class EmpleadoBL {
         return mensaje;
     }
      
-       public static ArrayList<Empleado> listar() {
+       public  ArrayList<Empleado> listar() {
         return EmpleadoDAl.listar();
     }
 }

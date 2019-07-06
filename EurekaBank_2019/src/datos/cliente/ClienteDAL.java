@@ -21,7 +21,7 @@ public class ClienteDAL extends DAL {
 
 
 
-    public static String insertar(Cliente cliente) {
+    public  String insertar(Cliente cliente) {
 
         //p_codigo ,p_paterno,p_materno,p_nombre,p_dni,p_ciudad,p_direccion,p_telefono,p_email
         String mensaje = null;
@@ -54,7 +54,7 @@ public class ClienteDAL extends DAL {
         return mensaje;
     }
 
-    public static String buscar(String codigo) {
+    public  String buscar(String codigo) {
         String mensaje = null;
         try {
             String sql = "call sp_buscarCliente(?)";
@@ -81,7 +81,7 @@ public class ClienteDAL extends DAL {
         return mensaje;
     }
 
-    public static String actualizar(Cliente cliente) {
+    public  String actualizar(Cliente cliente) {
         String mensaje = null;
         try {
             String sql = "{call sp_acutualizarCliente(?,?,?,?,?,?,?,?,?)}";
@@ -147,7 +147,7 @@ public Cliente getCliente(String codigo) {
     }
 
 
-    public static ArrayList<Cliente> listar() {
+    public  ArrayList<Cliente> listar() {
 
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         Cliente cliente = null;
@@ -185,7 +185,7 @@ public Cliente getCliente(String codigo) {
         return clientes;
     }
 
-    public static String eliminar(String codigo) {
+    public  String eliminar(String codigo) {
         String mensaje = null;
         try {
             String sql = "{call sp_eliminarCliente(?)}";

@@ -43,7 +43,7 @@ public class ClienteBL {
     }
     
     
-     public static String buscar(String codigo) {     
+     public  String buscar(String codigo) {     
         return ClienteDAL.buscar(codigo);
     }
         
@@ -59,7 +59,7 @@ public class ClienteBL {
         }
         return mensaje;
     }
-   public static ArrayList<Cliente> listar(){
+   public  ArrayList<Cliente> listar(){
        return ClienteDAL.listar();
    }
 }

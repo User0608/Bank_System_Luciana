@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class SucursalDAL extends DAL {
 
-    public static ArrayList<Sucursal> listar() {
+    public  ArrayList<Sucursal> listar() {
         ArrayList<Sucursal> sucursales = new ArrayList<>();
         Sucursal sucursal;
         try {

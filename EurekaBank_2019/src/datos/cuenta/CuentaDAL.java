@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class CuentaDAL extends DAL {
 
-    public static String registrar(RealCuenta cuenta) {
+    public String registrar(RealCuenta cuenta) {
         String mensaje = "";
         try {
             //
@@ -57,7 +57,7 @@ public class CuentaDAL extends DAL {
         return mensaje;
     }
 
-    public static RealCuenta getCuenta(String codigo) {
+    public  RealCuenta getCuenta(String codigo) {
         RealCuenta cuenta = new RealCuenta();
         try {
             String sql = "select * from Cuenta where cuencodigo=?";
@@ -95,7 +95,7 @@ public class CuentaDAL extends DAL {
 
     }
 
-    public static ArrayList<RealCuenta> listar() {
+    public  ArrayList<RealCuenta> listar() {
         ArrayList<RealCuenta> cuentas = new ArrayList<>();
 
         try {
@@ -135,7 +135,7 @@ public class CuentaDAL extends DAL {
         return cuentas;
     }
 
-    public static String bloquear(String codigo) {
+    public  String bloquear(String codigo) {
 
         String mensaje = "";
         try {

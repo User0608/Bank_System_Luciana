@@ -13,7 +13,7 @@ import entidades.cuenta.RealCuenta;
  * @author R000R
  */
 public class FLogica {
-    public static void depositar(Cliente cliente,RealCuenta cuenta,Empleado empleado){
+    public  void depositar(Cliente cliente,RealCuenta cuenta,Empleado empleado){
         
     }
 
