@@ -15,8 +15,9 @@ import java.util.ArrayList;
  * @author R000R
  */
 public class ClienteBL {
-    public static ArrayList<RealCuenta> cuenta;
-    public static String insertar(String codigo,String paterno,String materno,
+     ArrayList<RealCuenta> cuenta;
+     ClienteDAL clientedal =new ClienteDAL();
+    public  String insertar(String codigo,String paterno,String materno,
             String nombre,String dni,String ciudad,String direccion,String telefono,String email,int estado) {
         String mensaje=null;
         if(codigo.trim().length()==5 &&
@@ -32,7 +33,7 @@ public class ClienteBL {
        
             Cliente cliente =new Cliente(codigo,cuenta,dni,telefono,email,paterno,materno,nombre,ciudad,
             direccion);
-            mensaje = ClienteDAL.insertar(cliente);
+            mensaje = clientedal.insertar(cliente);
             if(mensaje.compareTo("true")==0)
                 mensaje = "Registro insertado";
         } 
@@ -44,13 +45,13 @@ public class ClienteBL {
     
     
      public  String buscar(String codigo) {     
-        return ClienteDAL.buscar(codigo);
+        return clientedal.buscar(codigo);
     }
         
-      public static String eliminar(String codigo) {
+      public  String eliminar(String codigo) {
         String mensaje = null;
         if(codigo.trim().length() == 5) {
-            mensaje = ClienteDAL.eliminar(codigo);    
+            mensaje = clientedal.eliminar(codigo);    
             if(mensaje.compareTo("true")==0)
                 mensaje = "Cliente eliminado";
         } 
@@ -60,6 +61,6 @@ public class ClienteBL {
         return mensaje;
     }
    public  ArrayList<Cliente> listar(){
-       return ClienteDAL.listar();
+       return clientedal.listar();
    }
 }

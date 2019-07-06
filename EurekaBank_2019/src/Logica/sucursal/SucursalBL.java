@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * @author R000R
  */
 public class SucursalBL {
-     
+     SucursalDAL sucursaldal =new SucursalDAL();
     
     public  ArrayList<Sucursal> listar() {
-        return SucursalDAL.listar();
+        return sucursaldal.listar();
     }
 }

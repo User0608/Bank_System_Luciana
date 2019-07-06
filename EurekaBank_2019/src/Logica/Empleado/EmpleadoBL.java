@@ -5,13 +5,8 @@
  */
 package Logica.Empleado;
 import java.util.ArrayList;
-//import datos.cliente.ClienteDAL;
-//import datos.empleado.*;
-import datos.*;
+import  datos.*;
 import datos.empleado.EmpleadoDAl;
-//import entidades.movimiento.*;
-//import entidades.cuenta.*;
-//import entidades.moneda.*;
 import entidades.*;
 import entidades.cuenta.RealCuenta;
 import entidades.movimiento.Movimiento;
@@ -22,11 +17,13 @@ import entidades.movimiento.Movimiento;
  */
 public class EmpleadoBL {
     ArrayList<Movimiento> movimientos;
-    private RealCuenta cuenta;
+     RealCuenta cuenta;
+     EmpleadoDAl empleadodal= new EmpleadoDAl();
 
       public  String insertar(String codigo,  String paterno, String materno, String nombre, String ciudad,
               String direccion ,String usuario, String clave,int estado) {
         String mensaje;
+        
         if(codigo.trim().length()==4 &&
            paterno.trim().length()>1 && paterno.trim().length()<=25&&
            materno.trim().length()>1 &&materno.trim().length()<=25 &&
@@ -36,11 +33,12 @@ public class EmpleadoBL {
            usuario.trim().length()>1 &&usuario.trim().length()<=15 &&
            clave.trim().length()>1 &&clave.trim().length()<=15 &&
            estado==1 )
-        {            
-            if(EmpleadoDAl.buscar(codigo).compareTo("true")==0) {
+        {       
+            
+            if(empleadodal.buscar(codigo)=="true") {
                     Empleado empleado= new Empleado(movimientos,cuenta,usuario,clave,paterno,materno,
                             nombre,ciudad,direccion);
-                    mensaje = EmpleadoDAl.insertar(empleado);                   
+                    mensaje = empleadodal.insertar(empleado);                   
                     if(mensaje.compareTo("true")==0)
                         mensaje = "Registro insertado";      
               
@@ -53,17 +51,20 @@ public class EmpleadoBL {
     }
         
     public  String buscar(String codigo) {
+        String mensaje;
         if(codigo.trim().length()==4){
-            return EmpleadoDAl.buscar(codigo);}
+            mensaje= empleadodal.buscar(codigo);
+        }
         else
-            return "Dato no válido";
+            mensaje= "Dato no válido";
+        return mensaje;
     }
     
     
      public  String eliminar(String codigo) {
         String mensaje;
         if(codigo.trim().length() == 4) {
-            mensaje = EmpleadoDAl.eliminar(codigo);
+            mensaje = empleadodal.eliminar(codigo);
             if(mensaje.compareTo("true")==0)
                mensaje = "Registro eliminado";      
         } 
@@ -74,6 +75,6 @@ public class EmpleadoBL {
     }
      
        public  ArrayList<Empleado> listar() {
-        return EmpleadoDAl.listar();
+        return empleadodal.listar();
     }
 }

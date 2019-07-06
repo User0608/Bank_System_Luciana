@@ -14,9 +14,10 @@ import java.util.ArrayList;
  * @author R000R
  */
 public class CuentaBL {
+    CuentaDAL cuentadal =new CuentaDAL();
     public  String registrar(RealCuenta cuenta){
         String mensaje;
-        mensaje=CuentaDAL.registrar(cuenta);
+        mensaje=cuentadal.registrar(cuenta);
         if(mensaje=="ok"){
             mensaje="Nueva Cuenta Registrada";
         }
@@ -26,7 +27,7 @@ public class CuentaBL {
      public  String bloquear(String codigo){   
          String mensaje;
         if(codigo.trim().length()!=0){
-            mensaje = CuentaDAL.bloquear(codigo);
+            mensaje = cuentadal.bloquear(codigo);
             if (mensaje=="ok"){
                 mensaje ="cuenta Bloqueada";
             }
@@ -39,6 +40,6 @@ public class CuentaBL {
      
      
       public  ArrayList<RealCuenta> listar(){
-        return CuentaDAL.listar();
+        return cuentadal.listar();
     }
 }
