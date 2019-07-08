@@ -13,19 +13,21 @@ import java.sql.Date;
  *
  * @author adriana
  */
-public class Movimiento {
-
-    private String codigo;
+public class Movimiento {   
     private TipoMovimiento tmovimiento;
     private Empleado empleado;
     private RealCuenta cuenta;
     private Date fecha;
     private int numero_movimiento;
     private double importe;
-
-    public Movimiento(String codigo, TipoMovimiento tmovimiento, Empleado empleado, RealCuenta cuenta,
+    
+    public Movimiento(){
+        
+    }
+            
+    public Movimiento(TipoMovimiento tmovimiento, Empleado empleado, RealCuenta cuenta,
             Date fecha, int numero_movimiento, double importe) {
-        this.codigo = codigo;
+        
         this.tmovimiento = tmovimiento;
         this.empleado = empleado;
         this.cuenta = cuenta;
@@ -33,15 +35,6 @@ public class Movimiento {
         this.numero_movimiento = numero_movimiento;
         this.importe = importe;
     }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public TipoMovimiento getTmovimiento() {
         return tmovimiento;
     }

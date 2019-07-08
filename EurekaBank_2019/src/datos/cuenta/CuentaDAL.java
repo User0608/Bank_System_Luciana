@@ -28,7 +28,6 @@ public class CuentaDAL extends DAL {
     public String registrar(RealCuenta cuenta) {
         String mensaje = "";
         try {
-            //
             //call sp_insertarCuenta("00300004","01","001","0001","00005",593.32,"2018/02/28","123456");
             String sql = "{call sp_insertarCuenta(?,?,?,?,?,?,?,?)}";
             conexion = Conexion.establecerConexion();

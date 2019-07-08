@@ -10,15 +10,26 @@ package entidades.movimiento;
  * @author adriana
  */
 public class TipoMovimiento {
+
+    private String codigo;
     private String descripcion;
     private String accion;
-    private String estado;
+   
 
-    public TipoMovimiento(String descripcion, String accion, String estado) {
+    public TipoMovimiento(String codigo, String descripcion, String accion) {
+        this.codigo = codigo;
         this.descripcion = descripcion;
-        this.accion = accion;
-        this.estado = estado;
+        this.accion = accion;      
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    
 
     public String getDescripcion() {
         return descripcion;
@@ -36,19 +47,11 @@ public class TipoMovimiento {
         this.accion = accion;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+   
 
     @Override
     public String toString() {
-        return "TipoMovimiento{" + "descripcion=" + descripcion + ", accion=" + accion + ", estado=" + estado + '}';
+        return "TipoMovimiento{" + "descripcion=" + descripcion + ", accion=" + accion + '}';
     }
-    
-    
-    
+
 }
