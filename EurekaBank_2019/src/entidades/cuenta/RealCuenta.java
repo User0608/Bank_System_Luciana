@@ -36,7 +36,9 @@ public class RealCuenta implements ICuenta {
         moneda=new Moneda();
         movimientos=new ArrayList<>();
     }
-    public RealCuenta(String codigo, ArrayList<Movimiento> movimientos, Sucursal sucursal, Cliente cliente, Moneda moneda, double saldo, Date fecha_creacion, String estado, int cantida_movimiento, String clave, String codigo_empleado) {
+    public RealCuenta(String codigo, ArrayList<Movimiento> movimientos, 
+            Sucursal sucursal, Cliente cliente, Moneda moneda, double saldo, 
+            Date fecha_creacion, String estado, int cantida_movimiento, String clave, String codigo_empleado) {
         this.codigo = codigo;
         this.movimientos = movimientos;
         this.sucursal = sucursal;

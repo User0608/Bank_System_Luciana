@@ -16,28 +16,25 @@ import entidades.movimiento.Movimiento;
  * @author R000R
  */
 public class EmpleadoBL {
+
     ArrayList<Movimiento> movimientos;
      RealCuenta cuenta;
      EmpleadoDAl empleadodal= new EmpleadoDAl();
-
-      public  String insertar(String codigo,  String paterno, String materno, String nombre, String ciudad,
-              String direccion ,String usuario, String clave,int estado) {
-        String mensaje;
-        
-        if(codigo.trim().length()==4 &&
-           paterno.trim().length()>1 && paterno.trim().length()<=25&&
-           materno.trim().length()>1 &&materno.trim().length()<=25 &&
-           nombre.trim().length()>1 &&nombre.trim().length()<=30 &&
-           ciudad.trim().length()>1 && ciudad.trim().length()<=30 &&
-           direccion.trim().length()>1 &&direccion.trim().length()<=50 &&
-           usuario.trim().length()>1 &&usuario.trim().length()<=15 &&
-           clave.trim().length()>1 &&clave.trim().length()<=15 &&
-           estado==1 )
+     
+       public  String insertar(Empleado empleado) {
+        String mensaje; 
+        if(empleado.getCodigo().trim().length()==4 &&
+           empleado.getPaterno().trim().length()>1 &&  empleado.getPaterno().trim().length()<=25&&
+           empleado.getMaterno().trim().length()>1 &&empleado.getMaterno().trim().length()<=25 &&
+           empleado.getNombre().trim().length()>1 && empleado.getNombre().trim().length()<=30 &&
+           empleado.getCiudad().trim().length()>1 &&  empleado.getCiudad().trim().length()<=30 &&
+           empleado.getDireccion().trim().length()>1 &&empleado.getDireccion().trim().length()<=50 &&
+           empleado.getUsuario().trim().length()>1 &&empleado.getUsuario().trim().length()<=15 &&
+           empleado.getClave().trim().length()>1 &&empleado.getClave().trim().length()<=15 
+           )
         {       
             
-            if(empleadodal.buscar(codigo)=="true") {
-                    Empleado empleado= new Empleado(movimientos,cuenta,usuario,clave,paterno,materno,
-                            nombre,ciudad,direccion);
+            if(empleadodal.buscar(empleado.getCodigo())=="true") {
                     mensaje = empleadodal.insertar(empleado);                   
                     if(mensaje.compareTo("true")==0)
                         mensaje = "Registro insertado";      
@@ -50,7 +47,7 @@ public class EmpleadoBL {
         return mensaje;
     }
         
-    public  String buscar(String codigo) {
+       public  String buscar(String codigo) {
         String mensaje;
         if(codigo.trim().length()==4){
             mensaje= empleadodal.buscar(codigo);
@@ -61,7 +58,7 @@ public class EmpleadoBL {
     }
     
     
-     public  String eliminar(String codigo) {
+       public  String eliminar(String codigo) {
         String mensaje;
         if(codigo.trim().length() == 4) {
             mensaje = empleadodal.eliminar(codigo);
@@ -77,4 +74,36 @@ public class EmpleadoBL {
        public  ArrayList<Empleado> listar() {
         return empleadodal.listar();
     }
+
+       public String actualizar(Empleado empleado){
+           String mensaje;
+           mensaje=null;
+           if(empleado.getCodigo().trim().length()==4 &&
+           empleado.getPaterno().trim().length()>1 &&  empleado.getPaterno().trim().length()<=25&&
+           empleado.getMaterno().trim().length()>1 &&empleado.getMaterno().trim().length()<=25 &&
+           empleado.getNombre().trim().length()>1 && empleado.getNombre().trim().length()<=30 &&
+           empleado.getCiudad().trim().length()>1 &&  empleado.getCiudad().trim().length()<=30 &&
+           empleado.getDireccion().trim().length()>1 &&empleado.getDireccion().trim().length()<=50 &&
+           empleado.getUsuario().trim().length()>1 &&empleado.getUsuario().trim().length()<=15 &&
+           empleado.getClave().trim().length()>1 &&empleado.getClave().trim().length()<=15 
+           ) {
+                if (empleadodal.buscar(empleado.getCodigo()) == "true"){
+                    mensaje = empleadodal.actualizar(empleado);
+                    if(mensaje == "true")
+                        mensaje = "Registro guardado";      
+                }
+                else
+                    mensaje = "Usuario ya existe";
+           }
+           return mensaje;
+       }
+       
+       public Empleado getEmpleado(String codigo){
+           if(codigo.trim().length()==4 ){
+               if (empleadodal.buscar(codigo)=="true"){
+                 return empleadodal.getEmpleado(codigo);                    
+           }else return null;
+           }
+           else  return null;
+       }
 }

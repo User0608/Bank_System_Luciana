@@ -19,4 +19,9 @@ public class SucursalBL {
     public  ArrayList<Sucursal> listar() {
         return sucursaldal.listar();
     }
+    public Sucursal getSucursal(String codigo){
+        if(codigo.trim().length()==3){
+          return sucursaldal.getSucursal(codigo);            
+        }else return null;        
+    }
 }
