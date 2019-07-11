@@ -7,6 +7,7 @@ package entidades;
 
 import entidades.cuenta.ICuenta;
 import entidades.cuenta.RealCuenta;
+import logica.Flogica;
 
 /**
  *
@@ -19,6 +20,16 @@ public class ProxyCuenta implements ICuenta {
     @Override
     public boolean depositar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public RealCuenta validar_datos_cuenta(String cuenta_codigo, String password) {
+        cuenta = Flogica.getInstance().getCuenta(cuenta_codigo);
+        if (cuenta != null) {
+            if (cuenta.validar_password(password)) {
+                return cuenta;
+            }
+        }
+        return null;
     }
 
 }

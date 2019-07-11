@@ -68,7 +68,7 @@ public class OperacionDAL extends DAL {
     public ArrayList<Movimiento> listaMovimiento(String codigo_cuenta) {
         ArrayList<Movimiento> movimientos = new ArrayList<Movimiento>();
         Movimiento movimiento;
-        try {    
+        try {
             String sql = "select * from Movimiento where cuencodigo = ?";
             conexion = Conexion.establecerConexion();
             prepared_statement = conexion.prepareStatement(sql);
@@ -79,6 +79,7 @@ public class OperacionDAL extends DAL {
                 movimiento.setNumero_movimiento(result_set.getInt(2));
                 movimiento.setFecha(result_set.getDate(3));
                 movimiento.setImporte(result_set.getDouble(6));
+                movimiento.setCodigo_tipo_movimiento(result_set.getString(5));
                 movimientos.add(movimiento);
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -133,7 +134,7 @@ public class OperacionDAL extends DAL {
             prepared_statement.setInt(2, movimiento.getNumero_movimiento());
             prepared_statement.setDate(3, movimiento.getFecha());
             prepared_statement.setString(4, movimiento.getEmpleado().getCodigo());
-            prepared_statement.setString(5, movimiento.getTmovimiento().getCodigo());
+            prepared_statement.setString(5, movimiento.getCodigo_tipo_movimiento());
             prepared_statement.setDouble(6, movimiento.getImporte());
             prepared_statement.executeUpdate();
             mensaje = "ok";
@@ -195,6 +196,7 @@ public class OperacionDAL extends DAL {
                         result_set.getString(2),
                         result_set.getString(3)
                 );
+                tipo_movimientos.add(tmovimiento);
             }
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e, "Error", 0);
@@ -206,7 +208,7 @@ public class OperacionDAL extends DAL {
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e, "Error", 0);
             }
-        }
+        }       
         return tipo_movimientos;
     }
 }

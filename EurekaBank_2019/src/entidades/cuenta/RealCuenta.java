@@ -22,7 +22,7 @@ public class RealCuenta implements ICuenta {
     private ArrayList<Movimiento> movimientos;
     private Sucursal sucursal;
     private Cliente cliente;
-    private Moneda moneda;   
+    private Moneda moneda;
     private double saldo;
     private Date fecha_creacion;
     private String estado;
@@ -31,11 +31,12 @@ public class RealCuenta implements ICuenta {
     private String codigo_empleado;
 
     public RealCuenta() {
-        sucursal=new Sucursal();
-        cliente=new Cliente();
-        moneda=new Moneda();
-        movimientos=new ArrayList<>();
+        sucursal = new Sucursal();
+        cliente = new Cliente();
+        moneda = new Moneda();
+        movimientos = new ArrayList<>();
     }
+
     public RealCuenta(String codigo, ArrayList<Movimiento> movimientos, Sucursal sucursal, Cliente cliente, Moneda moneda, double saldo, Date fecha_creacion, String estado, int cantida_movimiento, String clave, String codigo_empleado) {
         this.codigo = codigo;
         this.movimientos = movimientos;
@@ -49,7 +50,7 @@ public class RealCuenta implements ICuenta {
         this.clave = clave;
         this.codigo_empleado = codigo_empleado;
     }
-  
+
     public String getCodigo() {
         return codigo;
     }
@@ -89,7 +90,6 @@ public class RealCuenta implements ICuenta {
     public void setMoneda(Moneda moneda) {
         this.moneda = moneda;
     }
-   
 
     public double getSaldo() {
         return saldo;
@@ -141,17 +141,19 @@ public class RealCuenta implements ICuenta {
 
     @Override
     public String toString() {
-        return "RealCuenta{" + "codigo=" + codigo + ", movimientos=" + movimientos.size() 
+        return "RealCuenta{" + "codigo=" + codigo + ", movimientos=" + movimientos.size()
                 + ",\nsucursal=" + sucursal.toString() + ",\ncliente=" + cliente.toString()
-                + ",\nmoneda=" + moneda.toString() + ", saldo=" + saldo + ", fecha_creacion=" + fecha_creacion.toString() 
+                + ",\nmoneda=" + moneda.toString() + ", saldo=" + saldo + ", fecha_creacion=" + fecha_creacion.toString()
                 + ", estado=" + estado + ", cantida_movimiento=" + cantida_movimiento + ", clave=" + clave + ",codigo_empleado=" + codigo_empleado + '}';
     }
-    
-    
-    
+
     @Override
     public boolean depositar() {
         return true;
+    }
+
+    public boolean validar_password(String clave) {
+        return (this.clave.compareTo(clave) == 0) ? true : false;
     }
 
 }

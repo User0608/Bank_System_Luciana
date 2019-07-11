@@ -14,7 +14,7 @@ public class TipoMovimiento {
     private String codigo;
     private String descripcion;
     private String accion;
-   
+    
 
     public TipoMovimiento(String codigo, String descripcion, String accion) {
         this.codigo = codigo;

@@ -18,7 +18,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  *
  * @author adriana
  */
-public class EmpleadoDAl extends DAL {
+public class EmpleadoDAL extends DAL {
 
     //emplcodigio,emplpaterno,emplmatern,emplnombre,emplciudad,empldireccion,emplusuario,emplclave
     public String insertar(Empleado empleado) {
@@ -37,7 +37,7 @@ public class EmpleadoDAl extends DAL {
             callable_statement.setString(8, empleado.getClave().trim());
 
             callable_statement.executeUpdate();
-            mensaje = "true";
+            mensaje = "ok";
 
         } catch (ClassNotFoundException | SQLException e) {
             mensaje = e.getMessage();
@@ -62,7 +62,7 @@ public class EmpleadoDAl extends DAL {
             result_set = callable_statement.executeQuery();
             mensaje = "Registro no encontrado";
             while (result_set.next()) {
-                mensaje = "true";
+                mensaje = "ok";
             }
         } catch (ClassNotFoundException | SQLException e) {
             mensaje = e.getMessage();
@@ -94,7 +94,7 @@ public class EmpleadoDAl extends DAL {
             callable_statement.setString(8, empleado.getClave().trim());
 
             callable_statement.executeUpdate();
-            mensaje = "true";
+            mensaje = "ok";
 
         } catch (ClassNotFoundException | SQLException e) {
             mensaje = e.getMessage();
@@ -186,7 +186,7 @@ public class EmpleadoDAl extends DAL {
             callable_statement = conexion.prepareCall(sql);
             callable_statement.setString(1, codigo.trim());
             callable_statement.executeUpdate();
-            mensaje = "true";
+            mensaje = "ok";
 
         } catch (ClassNotFoundException | SQLException e) {
             mensaje = e.getMessage();

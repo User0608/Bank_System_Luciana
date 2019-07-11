@@ -13,35 +13,36 @@ import java.sql.Date;
  *
  * @author adriana
  */
-public class Movimiento {   
-    private TipoMovimiento tmovimiento;
+public class Movimiento {
+
+    private String codigo_tipo_movimiento;
     private Empleado empleado;
     private RealCuenta cuenta;
     private Date fecha;
     private int numero_movimiento;
     private double importe;
-    
-    public Movimiento(){
-        
+
+    public Movimiento() {
+
     }
-            
-    public Movimiento(TipoMovimiento tmovimiento, Empleado empleado, RealCuenta cuenta,
-            Date fecha, int numero_movimiento, double importe) {
-        
-        this.tmovimiento = tmovimiento;
+
+    public Movimiento(String codigo_tipo_movimiento, Empleado empleado, RealCuenta cuenta, Date fecha, int numero_movimiento, double importe) {
+        this.codigo_tipo_movimiento = codigo_tipo_movimiento;
         this.empleado = empleado;
         this.cuenta = cuenta;
         this.fecha = fecha;
         this.numero_movimiento = numero_movimiento;
         this.importe = importe;
     }
-    public TipoMovimiento getTmovimiento() {
-        return tmovimiento;
+
+    public String getCodigo_tipo_movimiento() {
+        return codigo_tipo_movimiento;
     }
 
-    public void setTmovimiento(TipoMovimiento tmovimiento) {
-        this.tmovimiento = tmovimiento;
+    public void setCodigo_tipo_movimiento(String codigo_tipo_movimiento) {
+        this.codigo_tipo_movimiento = codigo_tipo_movimiento;
     }
+
 
     public Empleado getEmpleado() {
         return empleado;
@@ -85,7 +86,9 @@ public class Movimiento {
 
     @Override
     public String toString() {
-        return "Movimiento{" + "tmovimiento=" + tmovimiento + ", empleado=" + empleado + ", cuenta=" + cuenta + ", fecha=" + fecha + ", numero_movimiento=" + numero_movimiento + ", importe=" + importe + '}';
+        return "Movimiento{" + "codigo_tipo_movimiento=" + codigo_tipo_movimiento + ", empleado=" + empleado + ", cuenta=" + cuenta + ", fecha=" + fecha + ", numero_movimiento=" + numero_movimiento + ", importe=" + importe + '}';
     }
+
+   
 
 }
