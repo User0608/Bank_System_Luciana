@@ -11,5 +11,6 @@ package entidades.cuenta;
  */
 public interface ICuenta {
 
-    boolean depositar();
+    boolean retiro(Double moto,boolean internet);
+    boolean deposito(Double monto,boolean internet);
 }

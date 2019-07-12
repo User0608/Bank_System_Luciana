@@ -1,6 +1,6 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template fecha_actualile, choose Tools | Templates
  * and open the template in the editor.
  */
 package prueba.datos;
@@ -21,10 +21,12 @@ public class TestOperacion {
     public static void main(String[] args) {
 //        System.out.println(op.depositar("00100002", 1250.50));
 //        System.out.println(op.retirar("00100002", 600));
-        GregorianCalendar f = new GregorianCalendar();
+        GregorianCalendar fecha_actual = new GregorianCalendar();
 
-        Date date = new Date(f.get(GregorianCalendar.YEAR), f.get(GregorianCalendar.MONTH), f.get(GregorianCalendar.DAY_OF_MONTH));
-        System.out.println(f.toString());
+        Date date = new Date(fecha_actual.get(GregorianCalendar.YEAR)-1900,
+                            fecha_actual.get(GregorianCalendar.MONTH)-1,
+                            fecha_actual.get(GregorianCalendar.DAY_OF_MONTH));
+        System.out.println(fecha_actual.toString());
         System.out.println("year->" + date.getYear() + " month ->" + date.getMonth() + " day ->" + date.getDate());
         System.out.println(date.toString());
     }

@@ -60,7 +60,9 @@ public class Moneda {
 
     @Override
     public String toString() {
-        return "Moneda{" + "interes_mensual=" + interes_mensual + ", costo_movimiento=" + costo_movimiento + ", cargo_mantenimiento=" + cargo_mantenimiento + ", descripcion=" + descripcion + '}';
+        return "Moneda{" + "codigo=" + codigo + ", interes_mensual=" + interes_mensual + ", costo_movimiento=" + costo_movimiento + ", cargo_mantenimiento=" + cargo_mantenimiento + ", descripcion=" + descripcion + '}';
     }
+
+    
 
 }

@@ -8,6 +8,7 @@ package entidades;
 import entidades.movimiento.Movimiento;
 import entidades.cuenta.RealCuenta;
 import java.util.ArrayList;
+import logica.Flogica;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Empleado extends Persona {
     private String clave;
 
     public Empleado() {
-        this.movimientos = new ArrayList<Movimiento>();        
+        this.movimientos = new ArrayList<Movimiento>();
     }
 
     public Empleado(ArrayList<Movimiento> movimientos, RealCuenta cuenta, String usuario, String clave, String paterno,
@@ -34,6 +35,22 @@ public class Empleado extends Persona {
         this.cuenta = cuenta;
         this.movimientos = (movimientos == null) ? new ArrayList<Movimiento>() : movimientos;
 
+    }
+
+    public Empleado validad_empleado(String usuario, String clave) {
+        Empleado empleado = Flogica.getInstance().getEmpleado(usuario);
+        if (empleado != null) {
+            if (empleado.getClave().compareTo(clave) == 0) {
+                return empleado;
+            } else {
+                System.out.println("-> fallo clave: ."+empleado.getClave());
+            }
+
+        } else {
+            System.out.println("-> fallo null");
+        }
+
+        return null;
     }
 
     public String getCodigo() {

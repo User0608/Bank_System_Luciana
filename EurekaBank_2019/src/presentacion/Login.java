@@ -3,19 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presetacion;
+package presentacion;
 
+import entidades.Empleado;
 import entidades.ProxyCuenta;
 import entidades.cuenta.RealCuenta;
 import java.awt.event.KeyEvent;
-import presetacion.cliente.FrmPrincipalCliente;
+import presentacion.cliente.FrmPrincipalCliente;
+import presentacion.cliente.FrmPrincipalEmpleado;
 
 /**
  *
  * @author adriana
  */
 public class Login extends javax.swing.JFrame {
-    FrmPrincipalCliente cliente;
+
+    FrmPrincipalCliente form_cliente;
+    FrmPrincipalEmpleado form_empleado;
+
     /**
      * Creates new form Login
      */
@@ -47,6 +52,7 @@ public class Login extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(441, 409));
 
         paneTittle.setBackground(new java.awt.Color(0, 83, 165));
 
@@ -61,7 +67,7 @@ public class Login extends javax.swing.JFrame {
             paneTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneTittleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelbTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                .addComponent(panelbTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                 .addContainerGap())
         );
         paneTittleLayout.setVerticalGroup(
@@ -167,12 +173,11 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(paneTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(paneLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(paneLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(59, 59, 59)
                         .addComponent(btnCancelar)
                         .addGap(130, 130, 130)
                         .addComponent(btnAceptar)))
@@ -188,7 +193,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -227,20 +232,29 @@ public class Login extends javax.swing.JFrame {
     private void onClickLogin() {
         String acc = txtAccount.getText();
         String pws = txtPassword.getText();
-        if (this.cbxTipo.getSelectedIndex() == 0) {
+        if (this.cbxTipo.getSelectedIndex() == 0 && acc.length()==8) {
             ProxyCuenta pcuenta = new ProxyCuenta();
-            RealCuenta rcuenta=pcuenta.validar_datos_cuenta(acc, pws);
+            RealCuenta rcuenta = pcuenta.validar_datos_cuenta(acc, pws);
             if (rcuenta != null) {
-                cliente=new FrmPrincipalCliente();
-                cliente.set_datos(rcuenta);
-                cliente.setVisible(true);
+                form_cliente = new FrmPrincipalCliente();
+                form_cliente.set_datos(pcuenta);
+                form_cliente.setVisible(true);
                 this.dispose();
-                System.out.println("cuenta ok");                
+                System.out.println("cuenta ok");
             } else {
                 lblStatus.setText("Error, datos incorrectos");
             }
-        } else {
-            ///falta implementar para empleado
+        } else if (this.cbxTipo.getSelectedIndex() == 1) {
+            Empleado empleado = new Empleado().validad_empleado(acc, pws);
+            if (empleado != null) {
+                form_empleado = new FrmPrincipalEmpleado();
+                form_empleado.set_datos_empleado(empleado);
+                form_empleado.setVisible(true);
+                this.dispose();
+                System.out.println("cuenta ok");
+            } else {
+                lblStatus.setText("Error, datos incorrectos");
+            }
         }
 
     }

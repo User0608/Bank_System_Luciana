@@ -6,11 +6,15 @@
 package entidades.cuenta;
 
 import entidades.Cliente;
+import entidades.Empleado;
 import entidades.Sucursal;
 import entidades.moneda.Moneda;
 import entidades.movimiento.Movimiento;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import logica.Flogica;
+import logica.empleado.EmpleadoBL;
 
 /**
  *
@@ -147,13 +151,99 @@ public class RealCuenta implements ICuenta {
                 + ", estado=" + estado + ", cantida_movimiento=" + cantida_movimiento + ", clave=" + clave + ",codigo_empleado=" + codigo_empleado + '}';
     }
 
-    @Override
-    public boolean depositar() {
-        return true;
-    }
-
     public boolean validar_password(String clave) {
         return (this.clave.compareTo(clave) == 0) ? true : false;
+    }
+
+    @Override
+    public boolean retiro(Double monto, boolean internet) {
+        boolean retorno = false;
+        Movimiento movimiento;
+
+        GregorianCalendar fecha_actual = new GregorianCalendar();
+        Date date = new Date(fecha_actual.get(GregorianCalendar.YEAR) - 1900,
+                fecha_actual.get(GregorianCalendar.MONTH) - 1,
+                fecha_actual.get(GregorianCalendar.DAY_OF_MONTH));
+
+        if (internet) {
+            if (saldo >= monto) {
+                this.saldo -= monto;
+                this.cantida_movimiento++;                
+                movimiento = new Movimiento();
+                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento()+1);
+                movimiento.setCodigo_tipo_movimiento("004");
+                movimiento.setFecha(date);
+                movimiento.setImporte(monto);
+                movimiento.setCuenta(this);
+                Empleado emple = Flogica.getInstance().getEmpleado(this.codigo_empleado);
+                movimiento.setEmpleado(emple);
+                
+                this.movimientos.add(movimiento);
+                retorno = true;
+            }
+        }else{
+            Double monto_total=monto+monto*moneda.getCosto_movimiento();
+           
+            if(saldo>=monto_total){
+                this.saldo -= monto_total;
+                this.cantida_movimiento++;                
+                movimiento = new Movimiento();
+                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento()+1);
+                movimiento.setCodigo_tipo_movimiento("004");
+                movimiento.setFecha(date);
+                movimiento.setImporte(monto_total);
+                movimiento.setCuenta(this);
+                Empleado emple = Flogica.getInstance().getEmpleado(this.codigo_empleado);
+                movimiento.setEmpleado(emple);                
+                this.movimientos.add(movimiento);
+                retorno = true;
+            }
+            
+        }
+        return retorno;
+    }
+
+    @Override
+    public boolean deposito(Double monto, boolean internet) {
+         boolean retorno = false;
+        Movimiento movimiento;
+
+        GregorianCalendar fecha_actual = new GregorianCalendar();
+        Date date = new Date(fecha_actual.get(GregorianCalendar.YEAR) - 1900,
+                fecha_actual.get(GregorianCalendar.MONTH) - 1,
+                fecha_actual.get(GregorianCalendar.DAY_OF_MONTH));
+
+        if (internet) {           
+                this.saldo += monto;
+                this.cantida_movimiento++;                
+                movimiento = new Movimiento();
+                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento()+1);
+                movimiento.setCodigo_tipo_movimiento("003");
+                movimiento.setFecha(date);
+                movimiento.setImporte(monto);
+                movimiento.setCuenta(this);
+                Empleado emple = Flogica.getInstance().getEmpleado(this.codigo_empleado);
+                movimiento.setEmpleado(emple);                
+                this.movimientos.add(movimiento);
+                retorno = true;
+            
+        }else{
+            Double monto_total=monto-monto*moneda.getCosto_movimiento();
+                this.saldo += monto_total;
+                this.cantida_movimiento++;                
+                movimiento = new Movimiento();
+                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento()+1);
+                movimiento.setCodigo_tipo_movimiento("003");
+                movimiento.setFecha(date);
+                movimiento.setImporte(monto_total);
+                movimiento.setCuenta(this);
+                Empleado emple = Flogica.getInstance().getEmpleado(this.codigo_empleado);
+                movimiento.setEmpleado(emple);                
+                this.movimientos.add(movimiento);
+                retorno = true;           
+            
+        }
+        return retorno;
     }
 
 }

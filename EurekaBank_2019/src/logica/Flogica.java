@@ -5,6 +5,8 @@
  */
 package logica;
 
+import entidades.Cliente;
+import entidades.Empleado;
 import entidades.Sucursal;
 import entidades.cuenta.RealCuenta;
 import entidades.movimiento.Movimiento;
@@ -64,7 +66,6 @@ public class Flogica {
 
     public String retirar(Movimiento movimiento) {
         String mensaje = "Error flogica";
-
         mensaje = operacion_bl.registarMovimiento(movimiento);
         if (mensaje.compareTo("ok") == 0) {
             mensaje = operacion_bl.retirar(movimiento.getCuenta().getCodigo(), movimiento.getImporte());
@@ -89,8 +90,8 @@ public class Flogica {
     public String getMovimiento_descripcion(String codigo) {
         Iterator<TipoMovimiento> itera = tmovimientos.iterator();
         while (itera.hasNext()) {
-            TipoMovimiento movimiento = itera.next(); 
-            System.out.println("movimiento.getCodigo() + "+ movimiento.getCodigo());
+            TipoMovimiento movimiento = itera.next();
+            System.out.println("movimiento.getCodigo() + " + movimiento.getCodigo());
             if (movimiento.getCodigo().compareTo(codigo) == 0) {
                 return movimiento.getDescripcion();
             }
@@ -98,4 +99,29 @@ public class Flogica {
         return null;
     }
 
+    public Empleado getEmpleado(String codigo_empleado) {
+        return empleado_bl.getEmpleado(codigo_empleado);
+    }
+
+    public Cliente getCliente(String codigo) {
+        return cliente_bl.getCliente(codigo);
+    }
+
+    public String rcuenta_cexistente(RealCuenta cuenta, Movimiento movimiento) {
+        String mensaje = null;
+        mensaje = cuenta_bl.registrar(cuenta);
+        if (mensaje.compareTo("ok") == 0) {
+            mensaje = operacion_bl.registarMovimiento(movimiento);
+        }
+        return mensaje;
+    }
+
+    public String registrarCuenta(RealCuenta cuenta, Movimiento movimiento, Cliente cliente) {
+        String mensaje = null;
+        mensaje = cliente_bl.insertar(cliente);
+        if (mensaje.compareTo("ok") == 0) {
+            mensaje = this.rcuenta_cexistente(cuenta, movimiento);
+        }
+        return mensaje;
+    }
 }

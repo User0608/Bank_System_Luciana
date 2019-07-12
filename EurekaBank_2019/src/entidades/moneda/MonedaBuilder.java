@@ -11,6 +11,7 @@ package entidades.moneda;
  */
 public interface MonedaBuilder {
 
+    MonedaBuilder buildCodigoMoneda();
     MonedaBuilder buildInteresMensaual();
 
     MonedaBuilder buildCostoMovimiento();
@@ -18,6 +19,7 @@ public interface MonedaBuilder {
     MonedaBuilder buildMantenimiento();
 
     MonedaBuilder buildDescripcion(String descripcion);
+    
 
     Moneda build();
 }

@@ -7,6 +7,8 @@ package entidades;
 
 import entidades.cuenta.ICuenta;
 import entidades.cuenta.RealCuenta;
+import entidades.movimiento.Movimiento;
+import javax.swing.JOptionPane;
 import logica.Flogica;
 
 /**
@@ -16,10 +18,9 @@ import logica.Flogica;
 public class ProxyCuenta implements ICuenta {
 
     private RealCuenta cuenta;
-
-    @Override
-    public boolean depositar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public RealCuenta getCuenta(){
+        return this.cuenta;
     }
 
     public RealCuenta validar_datos_cuenta(String cuenta_codigo, String password) {
@@ -30,6 +31,34 @@ public class ProxyCuenta implements ICuenta {
             }
         }
         return null;
+    }
+    
+    @Override
+    public boolean retiro(Double monto, boolean internet) {        
+        if (cuenta.retiro(monto, internet)) {
+            String mensaje = Flogica.getInstance().retirar(cuenta.getMovimientos().get(cuenta.getMovimientos().size() - 1));
+            if (mensaje.compareTo("ok") == 0) {
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, mensaje,"Error", 0);
+            }
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deposito(Double monto, boolean internet) {
+         if (cuenta.deposito(monto, internet)) {
+            String mensaje = Flogica.getInstance().depositar(cuenta.getMovimientos().get(cuenta.getMovimientos().size() - 1));
+            if (mensaje.compareTo("ok") == 0) {
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, mensaje,"Error", 0);
+            }
+            return false;
+        }
+        return false;
     }
 
 }

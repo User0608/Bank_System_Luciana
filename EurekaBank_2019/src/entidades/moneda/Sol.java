@@ -14,6 +14,7 @@ public class Sol implements MonedaBuilder {
     public static final float interesMensual = 0.7f;
     public static final float costoMovimiento = 2.00f;
     public static final float mantenimiento = 7.00f;
+    public static final String codigo="01";
 
     private Moneda moneda;
 
@@ -51,6 +52,12 @@ public class Sol implements MonedaBuilder {
     @Override
     public Moneda build() {
         return moneda;
+    }
+
+    @Override
+    public MonedaBuilder buildCodigoMoneda() {
+        moneda.setCodigo(Sol.codigo);
+        return this;
     }
 
 }

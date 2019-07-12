@@ -123,9 +123,9 @@ public class EmpleadoDAL extends DAL {
                 empleado.setMaterno(result_set.getString(3));
                 empleado.setNombre(result_set.getString(4));
                 empleado.setCiudad(result_set.getString(5));
-                empleado.setDireccion(result_set.getString(7));
-                empleado.setUsuario(result_set.getString(8));
-                empleado.setClave(result_set.getString(9));
+                empleado.setDireccion(result_set.getString(6));
+                empleado.setUsuario(result_set.getString(7));
+                empleado.setClave(result_set.getString(8));
             }
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e, "Error", 0);

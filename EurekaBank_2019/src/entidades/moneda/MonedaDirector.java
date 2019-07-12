@@ -20,7 +20,7 @@ public class MonedaDirector {
     public Moneda construir() {
         String tipo = (this.builder instanceof Dolar) ? "Dolares" : "Soles";
         return builder.buildCostoMovimiento().buildInteresMensaual()
-                .buildMantenimiento().buildDescripcion(tipo).build();
+                .buildMantenimiento().buildDescripcion(tipo).buildCodigoMoneda().build();
 
     }
 }

@@ -27,7 +27,7 @@ public class CuentaBL {
         if (cuenta.getCodigo().length() == 8 && cuenta.getMoneda() != null
                 && cuenta.getSucursal() != null && cuenta.getCodigo_empleado().length() == 4
                 && cuenta.getSaldo() >= 0 && cuenta.getFecha_creacion() != null
-                && cuenta.getClave().length() >= 6) {
+                && cuenta.getClave().length() > 2) {
             mensaje = cuenta_dal.registrar(cuenta);
         }
         return mensaje;

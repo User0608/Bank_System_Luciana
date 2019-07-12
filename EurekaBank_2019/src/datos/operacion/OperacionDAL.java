@@ -75,7 +75,7 @@ public class OperacionDAL extends DAL {
             prepared_statement.setString(1, codigo_cuenta);
             result_set = prepared_statement.executeQuery();
             while (result_set.next()) {
-                movimiento = new Movimiento();
+                movimiento = new Movimiento();                
                 movimiento.setNumero_movimiento(result_set.getInt(2));
                 movimiento.setFecha(result_set.getDate(3));
                 movimiento.setImporte(result_set.getDouble(6));

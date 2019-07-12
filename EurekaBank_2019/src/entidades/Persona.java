@@ -10,15 +10,17 @@ package entidades;
  * @author adriana
  */
 public class Persona {
+
     private String paterno;
     private String materno;
     private String nombre;
     private String ciudad;
     private String direccion;
-    
-    public Persona(){
-        
+
+    public Persona() {
+
     }
+
     public Persona(String paterno, String materno, String nombre, String ciudad, String direccion) {
         this.paterno = paterno;
         this.materno = materno;
@@ -26,8 +28,6 @@ public class Persona {
         this.ciudad = ciudad;
         this.direccion = direccion;
     }
-    
-    
 
     public String getPaterno() {
         return paterno;
@@ -69,10 +69,13 @@ public class Persona {
         this.direccion = direccion;
     }
 
+    public String getNombreCompleto() {
+        return this.getPaterno() + " " + this.getMaterno() + " " + this.getNombre();
+    }
+
     @Override
     public String toString() {
         return "Persona{" + "paterno=" + paterno + ", materno=" + materno + ", nombre=" + nombre + ", ciudad=" + ciudad + ", direccion=" + direccion + '}';
     }
-    
-    
+
 }

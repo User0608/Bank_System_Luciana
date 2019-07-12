@@ -112,7 +112,7 @@ public class ClienteDAL extends DAL {
     }
 
     public Cliente getCliente(String codigo) {
-        Cliente cliente = new Cliente();
+        Cliente cliente=null;
         try {
             String sql = "select * from Cliente where cliecodigo=?";
             conexion = Conexion.establecerConexion();
@@ -120,6 +120,7 @@ public class ClienteDAL extends DAL {
             prepared_statement.setString(1, codigo);
             result_set = prepared_statement.executeQuery();
             while (result_set.next()) {
+                cliente = new Cliente();
                 cliente.setCodigo(result_set.getString(1));
                 cliente.setPaterno(result_set.getString(2));
                 cliente.setMaterno(result_set.getString(3));
