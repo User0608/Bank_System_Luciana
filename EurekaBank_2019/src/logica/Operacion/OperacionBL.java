@@ -40,24 +40,14 @@ public class OperacionBL {
         return mensaje;
     }
 
-    private void mostrar(Movimiento movimiento) {
-        System.out.println("Cuenta->" + movimiento.getCuenta());
-        System.out.println("Nume mo->" + movimiento.getNumero_movimiento());
-
-        System.out.println("fech->" + movimiento.getFecha());
-        System.out.println("Emp->" + movimiento.getEmpleado());
-        System.out.println("tipo->" + movimiento.getCodigo_tipo_movimiento());
-
-        System.out.println(movimiento.getImporte());
-
-    }
+    
 
     public String registarMovimiento(Movimiento movimiento) {
 
         String mensaje = "Error puntero nulo";
         if (movimiento != null) {
             mensaje = "Error en los datos, registro movimiento";
-            this.mostrar(movimiento);
+           
             if (movimiento.getCuenta() != null && movimiento.getNumero_movimiento() >= 0
                     && movimiento.getFecha() != null && movimiento.getEmpleado() != null
                     && movimiento.getCodigo_tipo_movimiento().length() == 3 && movimiento.getImporte() > 0) {

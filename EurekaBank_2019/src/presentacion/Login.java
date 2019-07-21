@@ -9,8 +9,9 @@ import entidades.Empleado;
 import entidades.ProxyCuenta;
 import entidades.cuenta.RealCuenta;
 import java.awt.event.KeyEvent;
-import presentacion.cliente.FrmPrincipalCliente;
-import presentacion.cliente.FrmPrincipalEmpleado;
+import javax.swing.JOptionPane;
+import presentacion.operaciones.FrmPrincipalCliente;
+import presentacion.operaciones.FrmPrincipalEmpleado;
 
 /**
  *
@@ -232,31 +233,31 @@ public class Login extends javax.swing.JFrame {
     private void onClickLogin() {
         String acc = txtAccount.getText();
         String pws = txtPassword.getText();
-        if (this.cbxTipo.getSelectedIndex() == 0 && acc.length()==8) {
-            ProxyCuenta pcuenta = new ProxyCuenta();
-            RealCuenta rcuenta = pcuenta.validar_datos_cuenta(acc, pws);
-            if (rcuenta != null) {
-                form_cliente = new FrmPrincipalCliente();
-                form_cliente.set_datos(pcuenta);
-                form_cliente.setVisible(true);
-                this.dispose();
-                System.out.println("cuenta ok");
-            } else {
-                lblStatus.setText("Error, datos incorrectos");
+        if (acc.trim().length() != 0 && pws.trim().length() != 0 && acc.trim().length() < 10 && pws.trim().length() < 10) {
+            if (this.cbxTipo.getSelectedIndex() == 0 && acc.length() == 8) {
+                ProxyCuenta pcuenta = new ProxyCuenta();
+                if (pcuenta.validar_datos_cuenta(acc, pws)) {
+                    form_cliente = new FrmPrincipalCliente();
+                    form_cliente.set_datos(pcuenta);
+                    form_cliente.setVisible(true);
+                    this.dispose();
+                } else {
+                    lblStatus.setText("Error, datos incorrectos");
+                }
+            } else if (this.cbxTipo.getSelectedIndex() == 1) {
+                Empleado empleado = new Empleado().validad_empleado(acc, pws);
+                if (empleado != null) {
+                    form_empleado = new FrmPrincipalEmpleado();
+                    form_empleado.set_datos_empleado(empleado);
+                    form_empleado.setVisible(true);
+                    this.dispose();
+                } else {
+                    lblStatus.setText("Error, datos incorrectos");
+                }
             }
-        } else if (this.cbxTipo.getSelectedIndex() == 1) {
-            Empleado empleado = new Empleado().validad_empleado(acc, pws);
-            if (empleado != null) {
-                form_empleado = new FrmPrincipalEmpleado();
-                form_empleado.set_datos_empleado(empleado);
-                form_empleado.setVisible(true);
-                this.dispose();
-                System.out.println("cuenta ok");
-            } else {
-                lblStatus.setText("Error, datos incorrectos");
-            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Datos nulos o incorrectos", "Error", 0);
         }
-
     }
 
     /**

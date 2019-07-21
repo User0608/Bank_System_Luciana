@@ -11,8 +11,10 @@ import entidades.Sucursal;
 import entidades.moneda.Moneda;
 import entidades.movimiento.Movimiento;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 import logica.Flogica;
 import logica.empleado.EmpleadoBL;
 
@@ -166,84 +168,99 @@ public class RealCuenta implements ICuenta {
                 fecha_actual.get(GregorianCalendar.DAY_OF_MONTH));
 
         if (internet) {
+            monto = this.formatearDecimales(monto, 2);
             if (saldo >= monto) {
                 this.saldo -= monto;
-                this.cantida_movimiento++;                
+                this.cantida_movimiento++;
                 movimiento = new Movimiento();
-                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento()+1);
+                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento() + 1);
                 movimiento.setCodigo_tipo_movimiento("004");
                 movimiento.setFecha(date);
                 movimiento.setImporte(monto);
                 movimiento.setCuenta(this);
                 Empleado emple = Flogica.getInstance().getEmpleado(this.codigo_empleado);
                 movimiento.setEmpleado(emple);
-                
+
                 this.movimientos.add(movimiento);
                 retorno = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Saldo insuficiente", "Error", 0);
             }
-        }else{
-            Double monto_total=monto+monto*moneda.getCosto_movimiento();
-           
-            if(saldo>=monto_total){
-                this.saldo -= monto_total;
-                this.cantida_movimiento++;                
+        } else {
+            Double monto_total = monto + moneda.getCosto_movimiento();
+
+            if (saldo >= monto_total) {
+                this.saldo -= this.formatearDecimales(monto_total, 2);
+                this.cantida_movimiento++;
                 movimiento = new Movimiento();
-                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento()+1);
+                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento() + 1);
                 movimiento.setCodigo_tipo_movimiento("004");
                 movimiento.setFecha(date);
                 movimiento.setImporte(monto_total);
                 movimiento.setCuenta(this);
                 Empleado emple = Flogica.getInstance().getEmpleado(this.codigo_empleado);
-                movimiento.setEmpleado(emple);                
+                movimiento.setEmpleado(emple);
                 this.movimientos.add(movimiento);
                 retorno = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Saldo insuficiente", "Error", 0);
             }
-            
+
         }
         return retorno;
     }
 
     @Override
     public boolean deposito(Double monto, boolean internet) {
-         boolean retorno = false;
+        boolean retorno = false;
         Movimiento movimiento;
 
         GregorianCalendar fecha_actual = new GregorianCalendar();
         Date date = new Date(fecha_actual.get(GregorianCalendar.YEAR) - 1900,
                 fecha_actual.get(GregorianCalendar.MONTH) - 1,
                 fecha_actual.get(GregorianCalendar.DAY_OF_MONTH));
-
-        if (internet) {           
+        if (internet) {
+            monto = this.formatearDecimales(monto, 2);
+            if (monto > 0) {
                 this.saldo += monto;
-                this.cantida_movimiento++;                
+                this.cantida_movimiento++;
                 movimiento = new Movimiento();
-                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento()+1);
+                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento() + 1);
                 movimiento.setCodigo_tipo_movimiento("003");
                 movimiento.setFecha(date);
                 movimiento.setImporte(monto);
                 movimiento.setCuenta(this);
                 Empleado emple = Flogica.getInstance().getEmpleado(this.codigo_empleado);
-                movimiento.setEmpleado(emple);                
+                movimiento.setEmpleado(emple);
                 this.movimientos.add(movimiento);
                 retorno = true;
-            
-        }else{
-            Double monto_total=monto-monto*moneda.getCosto_movimiento();
-                this.saldo += monto_total;
-                this.cantida_movimiento++;                
+            } else {
+                JOptionPane.showMessageDialog(null, "El monto tine que ser mayor a 0", "Error", 0);
+            }
+
+        } else {
+            Double monto_total = monto - moneda.getCosto_movimiento();
+            if (monto_total > 0) {
+                this.saldo += this.formatearDecimales(monto_total, 2);
+                this.cantida_movimiento++;
                 movimiento = new Movimiento();
-                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento()+1);
+                movimiento.setNumero_movimiento(movimientos.get(0).getNumero_movimiento() + 1);
                 movimiento.setCodigo_tipo_movimiento("003");
                 movimiento.setFecha(date);
                 movimiento.setImporte(monto_total);
                 movimiento.setCuenta(this);
                 Empleado emple = Flogica.getInstance().getEmpleado(this.codigo_empleado);
-                movimiento.setEmpleado(emple);                
+                movimiento.setEmpleado(emple);
                 this.movimientos.add(movimiento);
-                retorno = true;           
-            
+                retorno = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "El monto tine que ser mayor a 0", "Error", 0);
+            }
         }
         return retorno;
     }
 
+    public Double formatearDecimales(Double numero, Integer numeroDecimales) {
+        return Math.round(numero * Math.pow(10, numeroDecimales)) / Math.pow(10, numeroDecimales);
+    }
 }

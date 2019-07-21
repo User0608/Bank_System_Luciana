@@ -32,8 +32,8 @@ public class Flogica {
     private SucursalBL sucursal_bl;
     private ClienteBL cliente_bl;
     private EmpleadoBL empleado_bl;
+    
     private ArrayList<TipoMovimiento> tmovimientos;
-
     private Flogica() {
         operacion_bl = new OperacionBL();
         cuenta_bl = new CuentaBL();
@@ -91,7 +91,6 @@ public class Flogica {
         Iterator<TipoMovimiento> itera = tmovimientos.iterator();
         while (itera.hasNext()) {
             TipoMovimiento movimiento = itera.next();
-            System.out.println("movimiento.getCodigo() + " + movimiento.getCodigo());
             if (movimiento.getCodigo().compareTo(codigo) == 0) {
                 return movimiento.getDescripcion();
             }

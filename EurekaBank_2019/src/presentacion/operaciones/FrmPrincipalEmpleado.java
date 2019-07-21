@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentacion.cliente;
+package presentacion.operaciones;
 
 import entidades.Empleado;
 import entidades.ProxyCuenta;
-import entidades.cuenta.RealCuenta;
 import entidades.movimiento.Movimiento;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -19,6 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import logica.Flogica;
 import presentacion.FormCrearCuenta;
+import presentacion.FormOperacion;
+import presentacion.Login;
 
 /**
  *
@@ -26,7 +27,6 @@ import presentacion.FormCrearCuenta;
  */
 public class FrmPrincipalEmpleado extends javax.swing.JFrame {
 
-    private RealCuenta cuenta;
     private ProxyCuenta pcuenta;
     private ArrayList<Movimiento> movimientos;
     private JPanel panel_list_movimientos;
@@ -61,7 +61,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
 
     private void reset_datos() {
         this.movimientos = null;
-        this.cuenta = null;
+        this.pcuenta = null;
         this.pcuenta = null;
         this.txt_sado.setText(null);
         this.lblSaldo.setText(null);
@@ -73,20 +73,19 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
     }
 
     public void set_datos_empleado(Empleado empleado) {
-        this.empleado = empleado;       
+        this.empleado = empleado;
         this.lblNombre_empleado.setText(empleado.getNombreCompleto());
         this.lbl_user.setText(empleado.getUsuario());
     }
 
-    private void set_datos(ProxyCuenta pcuenta) {
+    public void set_datos(ProxyCuenta pcuenta) {
         this.panel_list_movimientos.removeAll();
         this.pcuenta = pcuenta;
-        this.cuenta = pcuenta.getCuenta();
-        this.lbl_nombre_cliente.setText(cuenta.getCliente().getNombreCompleto());
-        this.txt_sado.setText(cuenta.getSaldo() + " " + cuenta.getMoneda().getDescripcion());
-        this.lbl_sucursal.setText(cuenta.getSucursal().getNombre());
-        this.lbl_direcion.setText(cuenta.getSucursal().getCiudad());
-        movimientos = cuenta.getMovimientos();
+        this.lbl_nombre_cliente.setText(pcuenta.getCliente().getNombreCompleto());
+        this.txt_sado.setText(pcuenta.getSaldo() + " " + pcuenta.getMoneda().getDescripcion());
+        this.lbl_sucursal.setText(pcuenta.getSucursal().getNombre());
+        this.lbl_direcion.setText(pcuenta.getSucursal().getCiudad());
+        movimientos = pcuenta.getMovimientos();
         Collections.reverse(movimientos);
         Iterator<Movimiento> itera = movimientos.iterator();
         while (itera.hasNext()) {
@@ -126,6 +125,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         lbl_user = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         item_deposito = new javax.swing.JMenuItem();
         item_retirar = new javax.swing.JMenuItem();
@@ -202,14 +202,33 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         lbl_user.setText("jLabel3");
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("salir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Operaciones");
 
         item_deposito.setText("Depositar");
+        item_deposito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_depositoActionPerformed(evt);
+            }
+        });
         jMenu2.add(item_deposito);
 
         item_retirar.setText("Retirar");
+        item_retirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_retirarActionPerformed(evt);
+            }
+        });
         jMenu2.add(item_retirar);
 
         item_new_cuenta.setText("Nueva cuenta");
@@ -293,7 +312,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
 
     private void lbl_sucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_sucursalMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, cuenta.getSucursal().getDireccion(), "Direcion Sucursal", 1);
+        JOptionPane.showMessageDialog(this, pcuenta.getSucursal().getDireccion(), "Direcion Sucursal", 1);
     }//GEN-LAST:event_lbl_sucursalMouseClicked
 
     private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okActionPerformed
@@ -306,17 +325,36 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void item_new_cuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_new_cuentaActionPerformed
-           this.form_nueva_cuenta.set_Codigo_empleado(this.empleado);
-           this.form_nueva_cuenta.setVisible(true);
-           this.form_nueva_cuenta.setLocationRelativeTo(this);
+        this.form_nueva_cuenta.set_Codigo_empleado(this.empleado);
+        this.form_nueva_cuenta.setVisible(true);
+        this.form_nueva_cuenta.setLocationRelativeTo(this);
     }//GEN-LAST:event_item_new_cuentaActionPerformed
+
+    private void item_depositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_depositoActionPerformed
+        FormOperacion op = new FormOperacion(this);
+        op.setdatos(pcuenta, "Deposito", false);
+        op.setLocationRelativeTo(this);
+        op.setVisible(true);
+    }//GEN-LAST:event_item_depositoActionPerformed
+
+    private void item_retirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_retirarActionPerformed
+        FormOperacion op = new FormOperacion(this);
+        op.setdatos(pcuenta, "Retiro", false);
+        op.setLocationRelativeTo(this);
+        op.setVisible(true);
+    }//GEN-LAST:event_item_retirarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void onClickLogin() {
         String acc = this.txtCodigo_cuenta.getText();
         String pws = this.txt_password.getText();
         ProxyCuenta pcuenta = new ProxyCuenta();
-        RealCuenta rcuenta = pcuenta.validar_datos_cuenta(acc, pws);
-        if (rcuenta != null) {
+        if (pcuenta.validar_datos_cuenta(acc, pws)) {
             this.set_datos(pcuenta);
             this.ocultar_dato_cliente(true);
         } else {
@@ -335,6 +373,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblNombre_empleado;
     private javax.swing.JLabel lblSaldo;
     private javax.swing.JLabel lbl_direcion;

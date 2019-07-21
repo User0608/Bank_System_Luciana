@@ -14,12 +14,18 @@ public class Dolar implements MonedaBuilder {
     public static final float interesMensual = 0.60f;
     public static final float costoMovimiento = 0.60f;
     public static final float mantenimiento = 2.50f;
-     public static final String codigo="01";
+    public static final String codigo = "01";
 
     private Moneda moneda;
 
     public Dolar() {
         moneda = new Moneda();
+    }
+
+    @Override
+    public MonedaBuilder buildCodigoMoneda() {
+        moneda.setCodigo(Dolar.codigo);
+        return this;
     }
 
     @Override
@@ -52,12 +58,6 @@ public class Dolar implements MonedaBuilder {
     @Override
     public Moneda build() {
         return moneda;
-    }
-
-    @Override
-    public MonedaBuilder buildCodigoMoneda() {
-        moneda.setCodigo(Dolar.codigo);
-        return this;
     }
 
 }

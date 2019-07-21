@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentacion.cliente;
+package presentacion.operaciones;
 
 import entidades.ProxyCuenta;
-import entidades.cuenta.RealCuenta;
 import entidades.movimiento.Movimiento;
 import java.awt.FlowLayout;
 import java.net.Proxy;
@@ -19,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import logica.Flogica;
 import presentacion.FormOperacion;
+import presentacion.Login;
 
 /**
  *
@@ -26,7 +26,7 @@ import presentacion.FormOperacion;
  */
 public class FrmPrincipalCliente extends javax.swing.JFrame {
 
-    RealCuenta cuenta;
+   
     ProxyCuenta pcuenta;
     ArrayList<Movimiento> movimientos;
     JPanel panel_list_movimientos;
@@ -46,14 +46,13 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
 
     public void set_datos(ProxyCuenta pcuenta) {
         this.panel_list_movimientos.removeAll();        
-        this.pcuenta=pcuenta;
-        this.cuenta=pcuenta.getCuenta();
-        this.lbl_nombre_cliente.setText(cuenta.getCliente().getNombreCompleto());
-        this.lbl_numero_cuenta.setText(cuenta.getCodigo());
-        this.txt_sado.setText(cuenta.getSaldo() + " " + cuenta.getMoneda().getDescripcion());
-        this.lbl_sucursal.setText(cuenta.getSucursal().getNombre());
-        this.lbl_direcion.setText(cuenta.getSucursal().getCiudad());
-        movimientos = cuenta.getMovimientos();
+        this.pcuenta=pcuenta;        
+        this.lbl_nombre_cliente.setText(pcuenta.getCliente().getNombreCompleto());
+        this.lbl_numero_cuenta.setText(pcuenta.getCodigo());
+        this.txt_sado.setText(pcuenta.getSaldo() + " " + pcuenta.getMoneda().getDescripcion());
+        this.lbl_sucursal.setText(pcuenta.getSucursal().getNombre());
+        this.lbl_direcion.setText(pcuenta.getSucursal().getCiudad());
+        movimientos = pcuenta.getMovimientos();
         Collections.reverse(movimientos);
         Iterator<Movimiento> itera = movimientos.iterator();        
         while (itera.hasNext()) {
@@ -111,10 +110,10 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
         panel_movimientosLayout.setVerticalGroup(
             panel_movimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_movimientosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(scrolPanel))
         );
 
         lbl_nombre_cliente.setText("txtNombre_cliente");
@@ -145,6 +144,11 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItem1.setText("Cerrar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -178,11 +182,11 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(140, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSaldo)
                             .addComponent(txt_sado, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +216,7 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
                 .addComponent(lbl_sucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_direcion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
                 .addComponent(lblSaldo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_sado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,7 +228,7 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
 
     private void lbl_sucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_sucursalMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, cuenta.getSucursal().getDireccion(), "Direcion Sucursal", 1);
+        JOptionPane.showMessageDialog(this, pcuenta.getSucursal().getDireccion(), "Direcion Sucursal", 1);
     }//GEN-LAST:event_lbl_sucursalMouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -241,6 +245,12 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
         op.setLocationRelativeTo(this);
         op.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+            Login login=new Login();
+            login.setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

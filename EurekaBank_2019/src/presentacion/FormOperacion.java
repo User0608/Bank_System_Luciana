@@ -8,7 +8,8 @@ package presentacion;
 import entidades.ProxyCuenta;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import presentacion.cliente.FrmPrincipalCliente;
+import presentacion.operaciones.FrmPrincipalCliente;
+import presentacion.operaciones.FrmPrincipalEmpleado;
 
 /**
  *
@@ -26,13 +27,13 @@ public class FormOperacion extends javax.swing.JFrame {
      */
     public FormOperacion(JFrame padre) {
         initComponents();
-        this.padre=padre;
+        this.padre = padre;
     }
 
     public void setdatos(ProxyCuenta pcuenta, String operacion, boolean internet) {
         this.pcuenta = pcuenta;
         this.internet = internet;
-        this.operacion=operacion;
+        this.operacion = operacion;
         this.lbl_tipo_operacion.setText(operacion);
 
     }
@@ -51,6 +52,10 @@ public class FormOperacion extends javax.swing.JFrame {
         btn_aceptar = new javax.swing.JButton();
         btn_cacelar = new javax.swing.JButton();
         txt_moto = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txt_costo_movimiento = new javax.swing.JTextField();
+        txt_moto_total = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,7 +79,21 @@ public class FormOperacion extends javax.swing.JFrame {
 
         txt_moto.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
         txt_moto.setForeground(new java.awt.Color(249, 74, 3));
-        txt_moto.setText("200");
+        txt_moto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_motoKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Costo Movimiento:");
+
+        jLabel3.setText("Moto Total:");
+
+        txt_costo_movimiento.setText("0");
+        txt_costo_movimiento.setEnabled(false);
+
+        txt_moto_total.setText("0");
+        txt_moto_total.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,19 +103,27 @@ public class FormOperacion extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_tipo_operacion)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(63, 63, 63)
+                                .addComponent(txt_moto_total))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_costo_movimiento))
                             .addComponent(txt_moto, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(btn_cacelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                                 .addComponent(btn_aceptar)))
-                        .addGap(67, 67, 67))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_tipo_operacion)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(67, 67, 67))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +134,15 @@ public class FormOperacion extends javax.swing.JFrame {
                     .addComponent(lbl_tipo_operacion))
                 .addGap(18, 18, 18)
                 .addComponent(txt_moto, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_costo_movimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_moto_total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_aceptar)
                     .addComponent(btn_cacelar))
@@ -123,40 +158,68 @@ public class FormOperacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cacelarActionPerformed
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
+      
         if (this.txt_moto.getText().trim().length() != 0) {
             double monto = Double.parseDouble(this.txt_moto.getText());
-            if (this.operacion.compareTo("Retiro") == 0) {                
+            if (this.operacion.compareTo("Retiro") == 0) {
                 if (this.pcuenta.retiro(monto, internet)) {
                     recargarPadre();
-                    JOptionPane.showMessageDialog(this, "operacion realizada", "Respuesta", 1);                    
+                    JOptionPane.showMessageDialog(this, "operacion realizada", "Respuesta", 1);
                     this.btn_cacelarActionPerformed(evt);
                 } else {
                     JOptionPane.showMessageDialog(this, "Error en el monto", "Respuesta", 1);
                 }
-            }else if(this.operacion.compareTo("Deposito")==0){
+            } else if (this.operacion.compareTo("Deposito") == 0) {
                 if (this.pcuenta.deposito(monto, internet)) {
                     recargarPadre();
-                    JOptionPane.showMessageDialog(this, "operacion realizada", "Respuesta", 1);                    
+                    JOptionPane.showMessageDialog(this, "operacion realizada", "Respuesta", 1);
                     this.btn_cacelarActionPerformed(evt);
                 } else {
                     JOptionPane.showMessageDialog(this, "Error en el monto", "Respuesta", 1);
-                } 
+                }
             }
         }
     }//GEN-LAST:event_btn_aceptarActionPerformed
 
-     private void recargarPadre(){
-         if(padre instanceof FrmPrincipalCliente){
-             FrmPrincipalCliente padre_c=(FrmPrincipalCliente) padre;            
-             padre_c.set_datos(pcuenta);
-         }
-     }
- 
+    private void txt_motoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_motoKeyReleased
+        if (this.txt_moto.getText().trim().length() != 0) {
+            try {
+                double doub = Double.parseDouble(this.txt_moto.getText().trim());             
+                if (!internet) {
+                    this.txt_costo_movimiento.setText(((this.operacion.compareTo("Retiro") == 0) ? "+" : "-")
+                            + String.valueOf(this.pcuenta.getMoneda().getCosto_movimiento()));
+                    double total = (this.operacion.compareTo("Retiro") == 0) ? doub + this.pcuenta.getMoneda().getCosto_movimiento()
+                            : doub - this.pcuenta.getMoneda().getCosto_movimiento();
+                    this.txt_moto_total.setText(String.valueOf(doub+this.pcuenta.getMoneda().getCosto_movimiento()));
+                } else{
+                    this.txt_moto_total.setText(String.valueOf(doub));
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Por favor engrese solo numero", "Respuesta", 1);
+                this.txt_moto.setText(this.txt_moto.getText().trim().substring(0, this.txt_moto.getText().trim().length() - 1));
+            }
+        }
+    }//GEN-LAST:event_txt_motoKeyReleased
+
+    private void recargarPadre() {
+        if (padre instanceof FrmPrincipalCliente) {
+            FrmPrincipalCliente padre_c = (FrmPrincipalCliente) padre;
+            padre_c.set_datos(pcuenta);
+        } else {
+            FrmPrincipalEmpleado padre_e = (FrmPrincipalEmpleado) padre;
+            padre_e.set_datos(pcuenta);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_aceptar;
     private javax.swing.JButton btn_cacelar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lbl_tipo_operacion;
+    private javax.swing.JTextField txt_costo_movimiento;
     private javax.swing.JTextField txt_moto;
+    private javax.swing.JTextField txt_moto_total;
     // End of variables declaration//GEN-END:variables
 }
