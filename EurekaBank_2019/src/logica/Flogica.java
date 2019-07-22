@@ -21,7 +21,7 @@ import logica.sucursal.SucursalBL;
 
 /**
  *
- * @author adriana
+ * @author aBriones
  */
 public class Flogica {
 

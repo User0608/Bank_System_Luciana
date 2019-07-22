@@ -22,7 +22,7 @@ import presentacion.Login;
 
 /**
  *
- * @author adriana
+ * @author aBriones
  */
 public class FrmPrincipalCliente extends javax.swing.JFrame {
 
@@ -75,9 +75,6 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel_movimientos = new javax.swing.JPanel();
-        scrolPanel = new javax.swing.JScrollPane();
-        jLabel2 = new javax.swing.JLabel();
         lbl_nombre_cliente = new javax.swing.JLabel();
         lbl_numero_cuenta = new javax.swing.JLabel();
         lblSaldo = new javax.swing.JLabel();
@@ -85,6 +82,10 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbl_sucursal = new javax.swing.JLabel();
         lbl_direcion = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        scrolPanel = new javax.swing.JScrollPane();
+        panel_movimientos = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -93,42 +94,33 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(951, 538));
-
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel2.setText("Histoiral de movimientos");
-
-        javax.swing.GroupLayout panel_movimientosLayout = new javax.swing.GroupLayout(panel_movimientos);
-        panel_movimientos.setLayout(panel_movimientosLayout);
-        panel_movimientosLayout.setHorizontalGroup(
-            panel_movimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrolPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-            .addGroup(panel_movimientosLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        panel_movimientosLayout.setVerticalGroup(
-            panel_movimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_movimientosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrolPanel))
-        );
+        setMinimumSize(new java.awt.Dimension(655, 540));
+        setPreferredSize(new java.awt.Dimension(575, 540));
+        getContentPane().setLayout(null);
 
         lbl_nombre_cliente.setText("txtNombre_cliente");
+        getContentPane().add(lbl_nombre_cliente);
+        lbl_nombre_cliente.setBounds(6, 58, 190, 18);
 
         lbl_numero_cuenta.setText("lblNumero_cuenta");
+        getContentPane().add(lbl_numero_cuenta);
+        lbl_numero_cuenta.setBounds(6, 82, 180, 16);
 
         lblSaldo.setForeground(new java.awt.Color(146, 146, 146));
         lblSaldo.setText("Saldo");
+        getContentPane().add(lblSaldo);
+        lblSaldo.setBounds(6, 391, 32, 16);
 
         txt_sado.setEditable(false);
         txt_sado.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         txt_sado.setForeground(new java.awt.Color(255, 101, 0));
         txt_sado.setText("1000");
+        getContentPane().add(txt_sado);
+        txt_sado.setBounds(6, 413, 359, 40);
 
         jLabel1.setText("Sucursal:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(220, 40, 54, 16);
 
         lbl_sucursal.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         lbl_sucursal.setForeground(new java.awt.Color(247, 17, 56));
@@ -138,8 +130,37 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
                 lbl_sucursalMouseClicked(evt);
             }
         });
+        getContentPane().add(lbl_sucursal);
+        lbl_sucursal.setBounds(220, 60, 120, 27);
 
         lbl_direcion.setText("Lima");
+        getContentPane().add(lbl_direcion);
+        lbl_direcion.setBounds(220, 90, 90, 16);
+
+        jLabel3.setText("Hola");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(6, 36, 180, 16);
+
+        javax.swing.GroupLayout panel_movimientosLayout = new javax.swing.GroupLayout(panel_movimientos);
+        panel_movimientos.setLayout(panel_movimientosLayout);
+        panel_movimientosLayout.setHorizontalGroup(
+            panel_movimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 632, Short.MAX_VALUE)
+        );
+        panel_movimientosLayout.setVerticalGroup(
+            panel_movimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 515, Short.MAX_VALUE)
+        );
+
+        scrolPanel.setViewportView(panel_movimientos);
+
+        getContentPane().add(scrolPanel);
+        scrolPanel.setBounds(380, 40, 270, 479);
+
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        jLabel2.setText("Histoiral de movimientos");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(380, 10, 194, 24);
 
         jMenu1.setText("File");
 
@@ -175,54 +196,6 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(140, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSaldo)
-                            .addComponent(txt_sado, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_numero_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_sucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_direcion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(16, 16, 16)))
-                .addComponent(panel_movimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_movimientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_numero_cuenta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_sucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_direcion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
-                .addComponent(lblSaldo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_sado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -256,6 +229,7 @@ public class FrmPrincipalCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author adriana
+ * @author nuri-
  */
 public class OperacionDAL extends DAL {
 

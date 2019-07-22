@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author adriana
+ * @author nuri-
  */
 public class SucursalDAL extends DAL {
 

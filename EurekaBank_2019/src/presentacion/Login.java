@@ -15,7 +15,7 @@ import presentacion.operaciones.FrmPrincipalEmpleado;
 
 /**
  *
- * @author adriana
+ * @author aBriones
  */
 public class Login extends javax.swing.JFrame {
 
@@ -68,7 +68,7 @@ public class Login extends javax.swing.JFrame {
             paneTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneTittleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelbTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                .addComponent(panelbTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                 .addContainerGap())
         );
         paneTittleLayout.setVerticalGroup(
@@ -161,7 +161,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Salir");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -194,7 +194,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -227,7 +227,11 @@ public class Login extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int resultado = JOptionPane.showConfirmDialog(this, "¿Desea salir?", "Salir", dialog);
+        if (resultado == 0) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void onClickLogin() {

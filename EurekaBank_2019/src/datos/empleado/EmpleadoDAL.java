@@ -16,7 +16,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
- * @author adriana
+ * @author nuri-
  */
 public class EmpleadoDAL extends DAL {
 
